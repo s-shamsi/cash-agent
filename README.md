@@ -1,4 +1,4 @@
-# 🏦 Cash Agent
+# Cash Agent
 
 Cash Agent is a prototype treasury optimization system that evaluates available cash, estimates short-term liquidity requirements, and recommends allocations into yield-generating products while maintaining an operational cash buffer.
 
