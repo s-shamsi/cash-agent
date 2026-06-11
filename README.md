@@ -1,26 +1,144 @@
 # 🏦 Cash Agent
 
-This **Cash Agent** is an AI-powered treasury management tool designed to help businesses optimize their idle cash. Using the Claude 3.5 Sonnet model, the agent analyzes liquidity, forecasts cash flow, and recommends high-yield allocations across investment products.
+Cash Agent is a prototype treasury optimization system that evaluates available cash, estimates short-term liquidity requirements, and recommends allocations into yield-generating products while maintaining an operational cash buffer.
 
-## 🌟 Key Features
-*   **Autonomous Orchestration:** Uses a ReAct (Reasoning and Acting) loop to fetch real-time account balances and market rates before making decisions.
-*   **Safety First:** Maintains a strict liquidity buffer to ensure the business always has enough cash for operations.
-*   **Audit Trail:** Every recommendation is logged into a local SQLite database (`outcomes.db`), creating a "data moat" for future performance analysis.
-*   **Professional UI:** A clean Streamlit dashboard that visualizes cash allocations and projected annual yields.
+The project demonstrates how a large language model can be integrated with deterministic financial rules and simulated banking APIs to support treasury decision-making workflows.
 
-## 🛠️ Project Structure
-*   `app.py`: The main user interface and dashboard.
-*   `agent.py`: The logic that connects to Anthropic's Claude AI.
-*   `backend.py`: Simulates banking APIs and cash flow forecasting.
-*   `database.py`: Handles the persistence of agent decisions and outcomes.
-*   `requirements.txt`: Lists the necessary Python libraries to run the project.
+---
 
-## 🚀 Getting Started
+## Overview
 
-### 1. Prerequisites
-Ensure you have Python 3.9+ installed and an **Anthropic API Key**.
+The workflow implemented in this project is:
 
-### 2. Installation
-Clone the repository or download the files, then install the dependencies:
+1. Retrieve account balances from a backend service.
+2. Estimate available surplus cash after reserving a liquidity buffer.
+3. Query available investment products and interest rates.
+4. Generate an allocation recommendation.
+5. Persist recommendations to a local database for auditing and analysis.
+
+The application is intentionally lightweight and designed as a proof-of-concept rather than a production treasury platform.
+
+---
+
+## Features
+
+### Cash Position Analysis
+
+The system evaluates available cash balances and estimates surplus liquidity based on projected inflows, outflows, and a required operational buffer.
+
+### Allocation Recommendations
+
+A language model is used to generate structured allocation recommendations based on the financial context provided to it.
+
+### Audit Logging
+
+All recommendations are stored in a local SQLite database, allowing historical recommendations to be reviewed and analyzed.
+
+### Interactive Dashboard
+
+A simple Streamlit interface allows users to run allocation scenarios and inspect historical recommendations.
+
+---
+
+## Project Structure
+
+```text
+cash-agent/
+├── app.py
+├── agent.py
+├── backend.py
+├── database.py
+├── requirements.txt
+└── README.md
+```
+
+### app.py
+
+Streamlit user interface for running allocation scenarios and viewing historical recommendations.
+
+### agent.py
+
+Handles communication with the Anthropic API and converts model responses into structured JSON output.
+
+### backend.py
+
+Provides a mock treasury backend that simulates account balances, cashflow forecasts, and available investment products.
+
+### database.py
+
+Creates and manages the SQLite audit database used to store allocation recommendations.
+
+### requirements.txt
+
+Lists Python dependencies required to run the application.
+
+---
+
+## Installation
+
+### Prerequisites
+
+* Python 3.9+
+* Anthropic API key
+
+### Install Dependencies
+
 ```bash
 pip install -r requirements.txt
+```
+
+### Run the Application
+
+```bash
+streamlit run app.py
+```
+
+---
+
+## Example Workflow
+
+1. Enter an Anthropic API key.
+2. Run the allocation agent.
+3. Review the generated recommendation.
+4. Inspect historical recommendations stored in SQLite.
+
+---
+
+## Current Limitations
+
+This repository is intentionally simplified and has several limitations:
+
+* Uses a mock backend instead of real banking APIs.
+* Supports only a small set of simulated investment products.
+* Relies on LLM-generated recommendations rather than a deterministic optimization engine.
+* Uses SQLite for persistence.
+* Does not include authentication, authorization, or production deployment infrastructure.
+
+---
+
+## Future Improvements
+
+Potential future enhancements include:
+
+* Deterministic portfolio optimization logic.
+* Real market data integration.
+* Multiple investment products and allocation constraints.
+* Scenario analysis and stress testing.
+* Automated performance tracking of recommendations.
+* Containerized deployment with Docker.
+* Unit and integration test coverage.
+
+---
+
+## Purpose
+
+This project was built as a learning exercise to explore:
+
+* Agent-based financial workflows
+* Treasury optimization concepts
+* Streamlit application development
+* SQLite persistence
+* Integration with large language model APIs
+
+The focus is on demonstrating the end-to-end workflow rather than building a production-ready treasury management system.
+
